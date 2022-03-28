@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title">
+            <block name="movie_year" template="Cadence_Movie::pdp/html/movie_year.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Cadence\Movie\ViewModel\MovieProductData</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <referenceBlock name="product.info.main">
+            <block name="movie_rating" template="Cadence_Movie::pdp/html/movie_rating.phtml" before="product.info.price">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Cadence\Movie\ViewModel\MovieProductData</argument>
+                </arguments>
+            </block>
+            <block name="movie_details" template="Cadence_Movie::pdp/html/movie_details.phtml" after="product.info.price">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Cadence\Movie\ViewModel\MovieProductData</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <referenceBlock name="product.info.review" remove="true"/>
+        <referenceBlock name="product.info.stock.sku" remove="true"/>
+        <referenceBlock name="product.info.social" remove="true"/>
+    </body>
+</page>
+
