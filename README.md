@@ -1,8 +1,9 @@
 # Cadence Labs - M2 Full Stack Test
 ## Local Setup
 
-1. Follow the instructions on this page ensure you have completed the prerequisites for running Magento 2 on your local (https://devdocs.magento.com/guides/v2.4/install-gde/prereq/prereq-overview.html)
-2. Configure you app/etc/env.php with the following values, remember to replace DB_NAME, USERNAME, PASSWORD, LOCAL_URL to match your local environment
+1. Follow the instructions on this page ensure you have completed the prerequisites for running Magento 2 on your local:
+https://devdocs.magento.com/guides/v2.4/install-gde/prereq/prereq-overview.html
+2. Configure you app/etc/env.php with the following values, remember to replace DB_NAME, USERNAME, PASSWORD, LOCAL_URL to match your local environment.
 
 ```php
 <?php
@@ -111,9 +112,9 @@ return [
 ];
 ```
 3. A copy of the database is located in the `/sql/db.sql.gz` directory of this repo, please import that to your local database as it contains all the custom product attributes, attribute set, and category.
-4. Run `composer install` to install all the project dependencies
-5. Run `php bin/magento setup:upgrade` to finish installing the application
-6. Visit the local store URL to ensure the store loads, and you can see the home page
+4. Run `composer install` to install all the project dependencies.
+5. Run `php bin/magento setup:upgrade` to finish installing the application.
+6. Visit the local store URL to ensure the store loads, and you can see the home page.
 
 ### Admin Login
 Username: `cadence`
@@ -129,32 +130,29 @@ You will need to sign up for an account (https://www.themoviedb.org/signup) and 
 Once you have the API key you will be able to utilize the API to retrieve the data mentioned in this assignment.
 
 ## Backend
-Create a console script that will do the following
+### Part 1
+Create a Magento CLI script that will do the following:
 
 1. Use the **Get Popular** endpoint (https://developers.themoviedb.org/3/movies/get-popular-movies) to fetch the most popular movies from the first page of the endpoint and create a Magento 2 product for each movie in the API response.
 You should map the following attributes returned from the endpoint to these magento product attributes:
-
    - id -> sku
    - title -> name
    - overview -> description
 
 2. Using the id from the previous endpoint make a call to the Get Details endpoint (https://developers.themoviedb.org/3/movies/get-movie-details) to fetch the following information and map it to the corresponding product attributes:
-
    - genre -> genre | comma separated list of genre names
    - release_date -> year | you will need to parse out the year from the release date and store just the year
    - vote_average -> vote_average
 
 3. Make another call to Get Credits endpoint (https://developers.themoviedb.org/3/movies/get-movie-credits) to fetch the cast and crew information and map the returns information using the following instructions:
-
-   - Loop through all the cast and create a comma-separated list of actor `name` and save that to the `actors` product attribute
+   - Loop through all the cast and create a comma-separated list of actor `name` and save that to the `actors` product attribute.
    - Loop through all the crew entries and only save the following information:
      - if crew.job === "Producer"
-       - save as `producer` - if more than one it should be saved as a comma-separated list
+       - Save as `producer` - if more than one it should be saved as a comma-separated list.
      - if crew.job === "Director"
-       - save as `director` - if more than one it should be saved as a comma-separated list
+       - Save as `director` - if more than one it should be saved as a comma-separated list.
 
 4. All products should be created with the following additional configuration:
-
    - product_type: virtual product
    - qty: 100
    - price: $5.99
@@ -162,10 +160,16 @@ You should map the following attributes returned from the endpoint to these mage
    - category: Movie (See Cadence\Movie\Helper\Config::MOVIE_CATEGORY_ID)
    - attribute_set: Movie (See Cadence\Movie\Helper\Config::MOVIE_ATTRIBUTE_SET_ID)
 
-5. (Bonus) Images - If time permits, also use the Get Images endpoint (https://developers.themoviedb.org/3/movies/get-movie-images) to pull all the images associated with the movie and add that to the product gallery
+5. **(Bonus)** Images - If time permits, also use the Get Images endpoint (https://developers.themoviedb.org/3/movies/get-movie-images) to pull all the images associated with the movie and add that to the product gallery.
+
+### Part 2
+Create a Magento CLI script which prints product information based on a given SKU using direct SQL queries.
 
 ## Frontend
 - Create a new layout xml file in Cadence_Movie that adds a new block to output all the custom attributes parsed from the API and display it in the PDP.
+- Create a Composer patch which adds text to the PDP:
+  - Text - `(Details provided by The Movie DB)`
+  - The text should be rendered underneath the product name.
 - You are encouraged to use your creativity for this part and create a visually pleasing layout that contains all the elements listed in the mockup.
 
 ## Final Steps
