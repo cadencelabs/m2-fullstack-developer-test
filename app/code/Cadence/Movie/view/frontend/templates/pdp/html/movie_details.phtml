@@ -1,0 +1,23 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */ ?>
+<?php $viewModel = $block->getViewModel(); ?>
+<div class="movie-description">
+    <p><?= $viewModel->getDescription(); ?></p>
+</div>
+<div class="movie-director-wrapper">
+    <p class="movie-director">
+        <span class="movie-director__title"><?= __('Directed By:') ?></span>
+        <span class="movie-director__value"><?= $viewModel->getDirector(); ?></span>
+    </p>
+</div>
+<div class="movie-producer-wrapper">
+    <p class="movie-producer">
+        <span class="movie-producer__title"><?= __('Produced By:') ?></span>
+        <span class="movie-producer__value"><?= $viewModel->getProducer(); ?></span>
+    </p>
+</div>
+<div class="movie-cast-wrapper">
+    <p class="movie-cast">
+        <span class="movie-cast__title"><?= __('Cast:') ?></span>
+        <span class="movie-cast__value"><?= $viewModel->getMovieCast(); ?></span>
+    </p>
+</div>

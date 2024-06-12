@@ -1,0 +1,17 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */ ?>
+<?php $viewModel = $block->getViewModel(); ?>
+<div class="movie-ganre">
+    <p><?= $viewModel->getMovieGanre(); ?></p>
+</div>
+<div class="movie-rating">
+    <?php if ($viewModel->getMovieRating()): ?>
+        <div class="ratings-container">
+            <?php for ($i = 0; $i <= $viewModel->getMovieFullRating(); $i++): ?>
+                <span class="full-star"></span>
+            <?php endfor; ?>
+            <?php if ($viewModel->getMoviePartRating()): ?>
+                <span class="half-star"></span>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>
